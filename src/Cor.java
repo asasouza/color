@@ -37,10 +37,10 @@ public class Cor {
 			return r + ", " + g + ", " + b;
 		} else {
 			if (c != null && m != null && y != null && k != null) {
-				return CMYKtoRGB(this);
+				return CMYKToRGB(this);
 			} else {
 				if (hexadecimal != null) {
-					return HexadecimaltoRGB(this);
+					return HexadecimalToRGB(this);
 				}
 			}
 		}
@@ -52,11 +52,10 @@ public class Cor {
 			return c + ", " + m + ", " + y + ", " + k;
 		} else {
 			if (r != null && g != null && b != null) {
-				return RGBtoCMYK(this);
+				return RGBToCMYK(this);
 			} else {
 				if (hexadecimal != null) {
-					HexadecimaltoRGB(this);
-					return RGBtoCMYK(this);
+					return HexadecimalToCMYK(this);
 				}
 			}
 		}
@@ -68,11 +67,10 @@ public class Cor {
 			return hexadecimal;
 		} else {
 			if (r != null && g != null && b != null) {
-				return RGBtoHexadecimal(this);
+				return RGBToHexadecimal(this);
 			} else {
 				if (c != null && m != null && y != null && k != null) {
-					CMYKtoRGB(this);
-					return RGBtoHexadecimal(this);
+					return CMYKToHexadecimal(this);
 				}
 			}
 		}
@@ -80,7 +78,7 @@ public class Cor {
 		return null;
 	}
 
-	private String RGBtoCMYK(Cor cor) {
+	private String RGBToCMYK(Cor cor) {
 		double red = cor.r / 255;
 		double green = cor.g / 255;
 		double blue = cor.b / 255;
@@ -93,22 +91,29 @@ public class Cor {
 		return c + ", " + m + ", " + y + ", " + k;
 	}
 
-	private String CMYKtoRGB(Cor cor) {
+	private String RGBToHexadecimal(Cor cor) {
+		hexadecimal = String.format("#%02x%02x%02x", cor.r, cor.g, cor.b);
+		return hexadecimal;
+	}
+
+	private String CMYKToRGB(Cor cor) {
 		r = (int) (255 * (1 - cor.c) * (1 - cor.k));
 		g = (int) (255 * (1 - cor.m) * (1 - cor.k));
 		b = (int) (255 * (1 - cor.y) * (1 - cor.k));
 		return r + ", " + g + ", " + b;
 	}
 
-	private String RGBtoHexadecimal(Cor cor) {
-		hexadecimal = String.format("#%02x%02x%02x", cor.r, cor.g, cor.b);
-		return hexadecimal;
+	private String CMYKToHexadecimal(Cor cor) {
+		return null;
 	}
 
-	private String HexadecimaltoRGB(Cor cor) {
+	private String HexadecimalToRGB(Cor cor) {
 		return Integer.valueOf(cor.hexadecimal.substring(1, 3), 16) + ", "
 				+ Integer.valueOf(cor.hexadecimal.substring(3, 5), 16) + ", "
 				+ Integer.valueOf(cor.hexadecimal.substring(5, 7), 16);
 	}
 
+	private String HexadecimalToCMYK(Cor cor) {
+		return null;
+	}
 }
