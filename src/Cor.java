@@ -83,11 +83,16 @@ public class Cor {
 		double green = cor.g / 255;
 		double blue = cor.b / 255;
 
-		double k = 1 - Integer.max(Integer.max(r, g), b);
-		double c = (1 - red - k) / (1 - k);
-		double m = (1 - green - k) / (1 - k);
-		double y = (1 - blue - k) / (1 - k);
-
+		double k = 1 - (Integer.max(Integer.max(r, g), b) / 255);
+		if (k == 1) {
+			c = 0.0;
+			m = 0.0;
+			y = 0.0;
+		} else {
+			double c = (1 - red - k) / (1 - k);
+			double m = (1 - green - k) / (1 - k);
+			double y = (1 - blue - k) / (1 - k);
+		}
 		return c + ", " + m + ", " + y + ", " + k;
 	}
 

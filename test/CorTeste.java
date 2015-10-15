@@ -26,7 +26,7 @@ public class CorTeste {
 
 	@Test
 	public void converteCorRGBparaCMYK() {
-		cor = Cor.novaCorRGB(255, 255, 255);
+		cor = Cor.novaCorRGB(0, 0, 0);
 		assertEquals("0.0, 0.0, 0.0, 1.0", cor.getColorCMYK());
 
 	}
