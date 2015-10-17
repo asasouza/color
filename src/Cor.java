@@ -85,15 +85,17 @@ public class Cor {
 
 		double k = 1 - (Integer.max(Integer.max(r, g), b) / 255);
 		if (k == 1) {
+			this.k = k;
 			c = 0.0;
 			m = 0.0;
 			y = 0.0;
 		} else {
-			double c = (1 - red - k) / (1 - k);
-			double m = (1 - green - k) / (1 - k);
-			double y = (1 - blue - k) / (1 - k);
+			this.k = k;
+			c = (1 - red - k) / (1 - k);
+			m = (1 - green - k) / (1 - k);
+			y = (1 - blue - k) / (1 - k);
 		}
-		return c + ", " + m + ", " + y + ", " + k;
+		return c + ", " + m + ", " + y + ", " + this.k;
 	}
 
 	private String RGBToHexadecimal(Cor cor) {
@@ -109,16 +111,19 @@ public class Cor {
 	}
 
 	private String CMYKToHexadecimal(Cor cor) {
-		return null;
+		this.CMYKToRGB(cor);
+		return this.RGBToHexadecimal(cor);		
 	}
 
 	private String HexadecimalToRGB(Cor cor) {
-		return Integer.valueOf(cor.hexadecimal.substring(1, 3), 16) + ", "
-				+ Integer.valueOf(cor.hexadecimal.substring(3, 5), 16) + ", "
-				+ Integer.valueOf(cor.hexadecimal.substring(5, 7), 16);
+		r = Integer.valueOf(cor.hexadecimal.substring(1, 3), 16);
+		g = Integer.valueOf(cor.hexadecimal.substring(3, 5), 16);
+		b = Integer.valueOf(cor.hexadecimal.substring(5, 7), 16);
+		return r + ", " + g + ", " + b;
 	}
 
 	private String HexadecimalToCMYK(Cor cor) {
-		return null;
+		this.HexadecimalToRGB(cor);
+		return this.RGBToCMYK(cor);
 	}
 }

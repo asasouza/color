@@ -58,7 +58,7 @@ public class CorTeste {
 	@Test
 	public void converteCorHexadecimalparaCMYK() {
 		cor = Cor.novaCorHexadecimal("#000000");
-		assertEquals("0.0, 0.0, 0.0, 1.0", cor.getColorCMYK(), 0.00005);
+		assertEquals("0.0, 0.0, 0.0, 1.0", cor.getColorCMYK());
 	}
 
 }
